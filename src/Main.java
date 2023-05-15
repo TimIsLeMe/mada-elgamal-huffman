@@ -19,14 +19,9 @@ public class Main {
                 "E39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9" +
                 "DE2BCBF6955817183995497CEA956AE515D2261898FA0510" +
                 "15728E5A8AACAA68FFFFFFFFFFFFFFFF";
-
-        BigInteger n = new BigInteger(hexNum, 16); // cyclic group: (Z*n,.n)
-        int g = 2; // Erzeuger
-
-    }
-
-    public static BigInteger createAnyB(BigInteger n, int g) { // 2^? mod n == 1
-        return null;
+        Elgamal em = new Elgamal(new BigInteger(hexNum, 16), BigInteger.TWO);
+        createFile("pk.txt", em.getPublicKey().toString().getBytes());
+        createFile("sk.txt", em.getPrivateKey().toString().getBytes());
     }
 
     public static boolean createFile(String fileName, byte[] content) {
