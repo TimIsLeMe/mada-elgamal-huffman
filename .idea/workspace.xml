@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="751daf36-cced-4cbe-b277-bdc7cf3074a0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/programmieraufgabe-elgamal.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EEA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="751daf36-cced-4cbe-b277-bdc7cf3074a0" name="Changes" comment="rough mockup for elgamal">
+      <change afterPath="$PROJECT_DIR$/chiffre.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/text.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Elgamal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elgamal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,7 +38,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Tim Hofmann/IdeaProjects/programmieraufgabe-elgamal/src",
+    "extract.method.default.visibility": "private",
+    "last_opened_file_path": "C:/Users/timho/Documents/IdeaProjects/mada-elgamal-huffman",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -43,6 +48,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\timho\Documents\IdeaProjects\mada-elgamal-huffman" />
+      <recent name="C:\Users\timho\Documents\IdeaProjects\mada-elgamal-huffman\src" />
       <recent name="C:\Users\Tim Hofmann\IdeaProjects\programmieraufgabe-elgamal\src" />
     </key>
   </component>
@@ -55,7 +62,18 @@
       <option name="presentableId" value="Default" />
       <updated>1684150765377</updated>
       <workItem from="1684150767011" duration="3491000" />
+      <workItem from="1684166122376" duration="184000" />
+      <workItem from="1684166648615" duration="2298000" />
+      <workItem from="1684250352850" duration="7473000" />
     </task>
+    <task id="LOCAL-00001" summary="rough mockup for elgamal">
+      <created>1684168955450</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684168955450</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -71,5 +89,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="rough mockup for elgamal" />
+    <option name="LAST_COMMIT_MESSAGE" value="rough mockup for elgamal" />
   </component>
 </project>

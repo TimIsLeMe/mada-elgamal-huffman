@@ -1,13 +1,11 @@
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 public class Main {
     public static void main(String[] args) {
-
+        // 1:
         String hexNum = "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD1" +
                 "29024E088A67CC74020BBEA63B139B22514A08798E3404DD" +
                 "EF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245" +
@@ -20,18 +18,44 @@ public class Main {
                 "DE2BCBF6955817183995497CEA956AE515D2261898FA0510" +
                 "15728E5A8AACAA68FFFFFFFFFFFFFFFF";
         Elgamal em = new Elgamal(new BigInteger(hexNum, 16), BigInteger.TWO);
+        em.createKeypair();
+        // 2:
         createFile("pk.txt", em.getPublicKey().toString().getBytes());
         createFile("sk.txt", em.getPrivateKey().toString().getBytes());
+
+        // 3:
+        String text = new String(readFileContent("text.txt"));
+        BigInteger pk = new BigInteger(new String(readFileContent("pk.txt")));
+        em.setPublicKey(pk); // same as before
+        createFile("chiffre_test.txt", em.encrypt(text).getBytes());
+        // 4:
+        String chiffre = String.valueOf(readFileContent("chiffre_test.txt"));
+        createFile("text-d.txt", em.decrypt(chiffre).getBytes());
     }
 
-    public static boolean createFile(String fileName, byte[] content) {
+    public static void createFile(String fileName, byte[] content) {
         try {
             FileOutputStream fos = new FileOutputStream(fileName);
             fos.write(content);
-        } catch(IOException e) {
-            System.out.println(e.getMessage());
-            return false;
+        } catch(IOException exception) {
+            throw new RuntimeException(exception.getMessage());
         }
-        return true;
+    }
+
+    public static char[] readFileContent(String fileName) {
+        try {
+            File file = new File(fileName);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String s = "";
+            String line;
+            while ((line = br.readLine()) != null) {
+                s += line;
+                if(br.ready()) s += "\n";
+            }
+            return s.toCharArray();
+        }
+        catch(IOException exception) {
+            throw new RuntimeException(exception.getMessage());
+        }
     }
 }
