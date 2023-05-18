@@ -1,29 +1,23 @@
-import javax.swing.*;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.InvalidPropertiesFormatException;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class Elgamal {
     private BigInteger publicKey;
     private BigInteger privateKey;
     private BigInteger g; // generator
     private BigInteger n; // Z*n -> cyclic group
-    private BigInteger ordNm1; //
+    private BigInteger ordN; //
 
     public Elgamal(BigInteger n, BigInteger g) {
         this.n = n;
         this.g = g;
-        this.ordNm1 = n.subtract(BigInteger.ONE); // assuming n is a prime
+        this.ordN = n.subtract(BigInteger.ONE); // assuming n is a prime
     }
 
     public void createKeypair() {
         SecureRandom secureRandom = new SecureRandom(); // for secure random number creation
-        privateKey = new BigInteger(ordNm1.bitLength(), secureRandom); // publicKey == b
+        privateKey = new BigInteger(ordN.bitLength(), secureRandom); // publicKey == b
         generatePublicKey();
     }
     public void generatePublicKey() {
@@ -80,7 +74,7 @@ public class Elgamal {
     }
 
     public void setPrivateKey(BigInteger privateKey) {
-        if(privateKey.compareTo(BigInteger.ZERO) < 0 || privateKey.compareTo(ordNm1) > 0)
+        if(privateKey.compareTo(BigInteger.ZERO) < 0 || privateKey.compareTo(ordN) > 0)
             throw new RuntimeException("private key has to be between 0 and ordN");
         this.privateKey = privateKey;
     }
