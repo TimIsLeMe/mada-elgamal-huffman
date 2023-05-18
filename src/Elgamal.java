@@ -7,17 +7,17 @@ public class Elgamal {
     private BigInteger privateKey;
     private BigInteger g; // generator
     private BigInteger n; // Z*n -> cyclic group
-    private BigInteger ordN; //
+    private BigInteger ordNm1; //
 
     public Elgamal(BigInteger n, BigInteger g) {
         this.n = n;
         this.g = g;
-        this.ordN = n.subtract(BigInteger.ONE); // assuming n is a prime
+        this.ordNm1 = n.subtract(BigInteger.ONE); // assuming n is a prime
     }
 
     public void createKeypair() {
         SecureRandom secureRandom = new SecureRandom(); // for secure random number creation
-        privateKey = new BigInteger(ordN.bitLength(), secureRandom); // publicKey == b
+        privateKey = new BigInteger(ordNm1.bitLength(), secureRandom); // publicKey == b
         generatePublicKey();
     }
     public void generatePublicKey() {
@@ -74,7 +74,7 @@ public class Elgamal {
     }
 
     public void setPrivateKey(BigInteger privateKey) {
-        if(privateKey.compareTo(BigInteger.ZERO) < 0 || privateKey.compareTo(ordN) > 0)
+        if(privateKey.compareTo(BigInteger.ZERO) < 0 || privateKey.compareTo(ordNm1) > 0)
             throw new RuntimeException("private key has to be between 0 and ordN");
         this.privateKey = privateKey;
     }
