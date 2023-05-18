@@ -2,6 +2,7 @@ import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import java.time.format.SignStyle;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,15 +23,21 @@ public class Main {
         // 2:
         createFile("pk.txt", em.getPublicKey().toString().getBytes());
         createFile("sk.txt", em.getPrivateKey().toString().getBytes());
-
         // 3:
         String text = new String(readFileContent("text.txt"));
         BigInteger pk = new BigInteger(new String(readFileContent("pk.txt")));
         em.setPublicKey(pk); // same as before
-        createFile("chiffre_test.txt", em.encrypt(text).getBytes());
+        createFile("chiffre.txt", em.encrypt(text).getBytes()); // encrypt and write to file
         // 4:
-        String chiffre = String.valueOf(readFileContent("chiffre_test.txt"));
-        createFile("text-d.txt", em.decrypt(chiffre).getBytes());
+        String chiffre = String.valueOf(readFileContent("chiffre.txt"));
+        createFile("text-d.txt", em.decrypt(chiffre).getBytes()); // decrypt and write to file
+        // 5
+        Elgamal gegebenEm = new Elgamal(new BigInteger(hexNum, 16), BigInteger.TWO);
+        BigInteger privateKeyGegeben = new BigInteger(new String(readFileContent("sk_gegeben.txt")));
+        gegebenEm.setPrivateKey(privateKeyGegeben);
+        gegebenEm.generatePublicKey();
+        String chiffreGegeben = String.valueOf(readFileContent("chiffre_gegeben.txt"));
+        createFile("text-d-5.txt", gegebenEm.decrypt(chiffreGegeben).getBytes()); // decrypt and write to file
     }
 
     public static void createFile(String fileName, byte[] content) {
