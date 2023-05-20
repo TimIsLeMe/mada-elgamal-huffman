@@ -8,8 +8,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-
-//        Elgamal();
+        Elgamal();
         Huffman();
     }
 
@@ -53,30 +52,41 @@ public class Main {
         String filePath = "huffman_files/";
         // 1:
         String text = new String(readFileContent(filePath + "text1.txt"));
-        Huffman huff = new Huffman(text);
+        Huffman huffTest = new Huffman(text);
         // 2:
-        huff.setStrCharFreq();
+        huffTest.setStrCharFreq();
         // 3:
-        huff.createTree();
-        huff.createCode();
+        huffTest.createTree();
+        huffTest.createCode();
         // 4:
-        StringBuilder sb = new StringBuilder();
-        Iterator<Map.Entry<Integer, String>> iterator = huff.huffmanCode.entrySet().iterator();
-        while(iterator.hasNext()) {
-            Map.Entry<Integer, String> entry = iterator.next();
-            sb.append(entry.getKey()).append(":").append(entry.getValue());
-            if(iterator.hasNext()) sb.append("-");
-        }
-        createFile(filePath + "dec_tab.txt", sb.toString().getBytes());
+        createFile(filePath + "dec_tab.txt", huffTest.getDecTab().getBytes());
         // 5 - 8:
-        createFile(filePath + "output.dat", Huffman.convertBitStringToByteArray(huff.compress(text)));
+        createFile(filePath + "output.dat", Huffman.convertBitStringToByteArray(huffTest.compress(text)));
         // 9 - 10:
-        String content = Huffman.convertByteArrayToBitString(readFileBytes(filePath + "output.dat"));
-        System.out.println(content);
-        System.out.println(huff.decompress(content));
-        createFile(filePath + "decompress.txt", huff.decompress(content).getBytes());
+        System.out.println("text1 bytes: " + text.getBytes().length);
+        byte[] compressed = readFileBytes(filePath + "output.dat");
+        String content = Huffman.convertByteArrayToBitString(compressed);
+        System.out.println("text1 compressed bytes: " + compressed.length);
+        createFile(filePath + "decompress.txt", huffTest.decompress(content).getBytes());
+        // 9 - 10 -> test 2:
+        String text2 = new String(readFileContent(filePath + "text2.txt"));
+        System.out.println("text2 bytes: " + text2.getBytes().length);
+        Huffman huff2 = new Huffman(text2);
+        huff2.init();
+        createFile(filePath + "dec_tab2.txt", huff2.getDecTab().getBytes());
+        createFile(filePath + "output2.dat", Huffman.convertBitStringToByteArray(huff2.compress(text2)));
+        byte[] compressed2 = readFileBytes(filePath + "output2.dat");
+        String content2 = Huffman.convertByteArrayToBitString(readFileBytes(filePath + "output2.dat"));
+        createFile(filePath + "decompress2.txt", content2.getBytes());
+        System.out.println("text2 compressed bytes: " + compressed2.length);
         // 11:
-
+        Huffman huffDec = new Huffman();
+        huffDec.huffmanCode = Huffman.parseStringDecTab(String.valueOf(readFileContent(filePath + "dec_tab-mada_gegeben.txt")));
+        String compressedGiven = Huffman.convertByteArrayToBitString(readFileBytes(filePath + "output-mada_gegeben.dat"));
+        System.out.println("text-gegeben compressed bytes: " + compressedGiven.getBytes().length);
+        String originalText = huffDec.decompress(compressedGiven);
+        System.out.println("text-gegeben bytes: " + originalText.getBytes().length);
+        createFile(filePath + "decompress-mada_gegeben", originalText.getBytes());
     }
 
     public static void createFile(String fileName, byte[] content) {
